@@ -1,3 +1,4 @@
+## Required metadata file for both JavaScript and Docker actions
 name: 'Build Ruby'
 description: 'Builds the given Ruby version'
 author: New Relic

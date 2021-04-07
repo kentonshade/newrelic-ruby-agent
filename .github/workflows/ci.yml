@@ -1,39 +1,40 @@
-name: Continuous Integration
+name: Continuous Integration  ## name appear under workflows in the GHA UI
 ## Review yaml - notate and comment - kds
+## Build logs don't offer a clear start and end times - look into this.
 
-on:
-  push:
+on: ## Event that triggers the workflow - https://docs.github.com/en/actions/reference/events-that-trigger-workflows
+  push: 
     branches:
       - main
       - dev
       - fix_ci_issues
-  pull_request:
-  schedule:
-    - cron:  '0 9 * * *'
+  pull_request:  ## nothing configured here
+  schedule:  ## Scheduled run of build per syntax below:
+    - cron:  '0 9 * * *'  ## min, hour, day, month, day of week - this should run every day at 9am - confirm...
 
-jobs:
-  build-ruby:
+jobs:  ## Rememeber run in parallel by default - see https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobs
+  build-ruby:  ## Job ID, no job name designated
     runs-on: ubuntu-18.04
-    strategy:
-      matrix:
+    strategy:  ## Job matrix - see https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idstrategy
+      matrix:  ## Matrix - multiple jobs with variable substitution, they run in parallel - convoluted?  hard to monitor?  Refer to logs
         ruby-version: [2.2.10, 2.3.8, 2.4.10, 2.5.8, 2.6.6, 2.7.1, 3.0.0, jruby-9.2.12.0]
     steps:
       - uses: actions/checkout@v2
 
       - name: Build Ruby ${{ matrix.ruby-version }}
-        uses: ./.github/actions/build-ruby
-        with:
-          ruby-version: ${{ matrix.ruby-version }}
+        uses: ./.github/actions/build-ruby  ## Uses action defined in this directory
+        with:  ## Map of input parameters as key:value pais, set as ENV variables
+          ruby-version: ${{ matrix.ruby-version }}  ## Resulting ENV variable: INPUT_RUBY-VERSION - check this, ENV variable values changes with each matrix run?
 
-  mini-env:
-    needs: build-ruby
+  mini-env: ## sequential given the depenedency below (needs build-ruby)
+    needs: build-ruby ## "needs" - Build-ruby must succeed in order for this job to run
     runs-on: ubuntu-18.04
     strategy:
-      fail-fast: false
-      matrix:
+      fail-fast: false  ## This option will NOT cancel any in-progress jobs, hte defaulkt is true
+      matrix: ## key: [values]
         rails: [norails, rails61, rails60, rails52, rails51, rails42, rails41, rails40, rails32, rails31, rails30]
         ruby-version: [2.2.10, 2.3.8, 2.4.10, 2.5.8, 2.6.6, 2.7.1, 3.0.0, jruby-9.2.12.0]
-        exclude:
+        exclude: ## Remove a jiob defined by the build matrix
           - ruby-version: "3.0.0"
             rails: rails30
           - ruby-version: "3.0.0"
