@@ -250,6 +250,7 @@ jobs:  ## Rememeber run in parallel by default - see https://docs.github.com/en/
       ## apt-get install -y libssl-dev - installed
       ## apt-get install openjdk-8-jdk -y - installed
       ## zlib1g-dev - installed
+      ## libyaml -  installed libyaml-0-2
       credentials:
          username: ${{ secrets.DOCKER_USER }}
          password: ${{ secrets.DOCKER_PASS }}
