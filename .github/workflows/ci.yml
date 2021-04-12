@@ -323,6 +323,7 @@ jobs:  ## Rememeber run in parallel by default - see https://docs.github.com/en/
       ### Testing only  -nick-invision is failing
       - name: test multiverse Tests
         run: /
+          chmod -R u+x /__w/_temp/
           bundle exec rake test:multiverse[group=agent,verbose]
 
       # - name: Start mysql
