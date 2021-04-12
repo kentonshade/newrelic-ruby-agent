@@ -16,13 +16,13 @@ jobs:  ## Rememeber run in parallel by default - see https://docs.github.com/en/
   build-ruby:  ## Job ID, no job name designated
     runs-on: ubuntu-18.04
     strategy:  ## Job matrix - see https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idstrategy
-      matrix:  ## Matrix - multiple jobs with variable substitution, they run in parallel - convoluted?  hard to monitor?  Refer to logs
+      matrix:  ## Matrix - multiple jobs with variable substitution, they run in PARALLEL (confirm) - convoluted?  hard to monitor?  Refer to logs
         ruby-version: [2.2.10, 2.3.8, 2.4.10, 2.5.8, 2.6.6, 2.7.1, 3.0.0, jruby-9.2.12.0]
     steps:
       - uses: actions/checkout@v2
 
       - name: Build Ruby ${{ matrix.ruby-version }}
-        uses: ./.github/actions/build-ruby  ## Uses action defined in this directory
+        uses: ./.github/actions/build-ruby  ## Uses action defined in this directory, requitred metadata file: action.yml - inquire as to the use of the JavaAcript (index.js)
         with:  ## Map of input parameters as key:value pais, set as ENV variables
           ruby-version: ${{ matrix.ruby-version }}  ## Resulting ENV variable: INPUT_RUBY-VERSION - check this, ENV variable values changes with each matrix run?
 
@@ -30,7 +30,7 @@ jobs:  ## Rememeber run in parallel by default - see https://docs.github.com/en/
     needs: build-ruby ## "needs" - Build-ruby must succeed in order for this job to run
     runs-on: ubuntu-18.04
     strategy:
-      fail-fast: false  ## This option will NOT cancel any in-progress jobs, hte defaulkt is true
+      fail-fast: false  ## This option will NOT cancel any in-progress jobs, the default is true
       matrix: ## key: [values]
         rails: [norails, rails61, rails60, rails52, rails51, rails42, rails41, rails40, rails32, rails31, rails30]
         ruby-version: [2.2.10, 2.3.8, 2.4.10, 2.5.8, 2.6.6, 2.7.1, 3.0.0, jruby-9.2.12.0]
@@ -132,7 +132,7 @@ jobs:  ## Rememeber run in parallel by default - see https://docs.github.com/en/
           - ruby-version: "jruby-9.2.12.0"
             rails: rails52
 
-    steps:
+    steps:  ## kds - Check if these steps occur for EACH instance of the matrix?  Can we not start services at the beginning prior to the start of the matrix?
       - uses: actions/checkout@v2
 
       - name: Build Ruby ${{ matrix.ruby-version }}
@@ -140,7 +140,7 @@ jobs:  ## Rememeber run in parallel by default - see https://docs.github.com/en/
         with:
           ruby-version: ${{ matrix.ruby-version }}
 
-      - name: Start mysql
+      - name: Start mysql ## kds - ubuntu image has mysql installed, again propose custom image
         run: sudo systemctl start mysql
 
       - name: Run Unit Tests
@@ -149,14 +149,14 @@ jobs:  ## Rememeber run in parallel by default - see https://docs.github.com/en/
           timeout_minutes: 20
           max_attempts: 2
           command:  bundle exec rake test:env[${{ matrix.rails }}] TESTOPTS="--verbose"
-        env:
+        env:  ## kds - ENV variables can be set once, is this declaring with every run of matrix?  Review logs
           DB_PORT: 3306
           MYSQL_PASSWORD: root
 
-  multiverse:
+  multiverse: ## kds - run this multiverse section to test for build times
     needs: build-ruby
     runs-on: ubuntu-18.04
-    services:
+    services:  ## kds - separate images being used for these services, each requiring download?  Propose Custom Docker image with all services available?
       redis:
         image: redis
         ports:
