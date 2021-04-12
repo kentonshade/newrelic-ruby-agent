@@ -329,9 +329,9 @@ jobs:  ## Rememeber run in parallel by default - see https://docs.github.com/en/
           timeout_minutes: 60
           max_attempts: 2
           command:  bundle exec rake test:multiverse[group=${{ matrix.multiverse }},verbose]
-        # env: ## kds -should not be necessary?
-        #   DB_PORT: 3306
-        #   MYSQL_PASSWORD: root
+        env: ## kds -should not be necessary?
+          DB_PORT: 3306
+          MYSQL_PASSWORD: root
 
       - name: Annotate errors
         if: ${{ failure() }}
