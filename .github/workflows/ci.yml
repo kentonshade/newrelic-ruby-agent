@@ -251,6 +251,7 @@ jobs:  ## Rememeber run in parallel by default - see https://docs.github.com/en/
       ## apt-get install openjdk-8-jdk -y - installed
       ## zlib1g-dev - installed
       ## libyaml -  installed libyaml-0-2
+      # Updated image now appears to be working.
       credentials:
          username: ${{ secrets.DOCKER_USER }}
          password: ${{ secrets.DOCKER_PASS }}
@@ -292,7 +293,8 @@ jobs:  ## Rememeber run in parallel by default - see https://docs.github.com/en/
       matrix:
         ## multiverse: [agent, api, background, background_2, database, httpclients, rails, rails_extras, rest, serialization, sinatra]
         multiverse: [agent, api]  ## Reducing for testing
-        ruby-version: [2.2.10, 2.3.8, 2.4.10, 2.5.8, 2.6.6, 2.7.1, 3.0.0, jruby-9.2.12.0]
+        ## ruby-version: [2.2.10, 2.3.8, 2.4.10, 2.5.8, 2.6.6, 2.7.1, 3.0.0, jruby-9.2.12.0]
+        ruby-version: [2.5.8, 2.6.6, 2.7.1, 3.0.0, jruby-9.2.12.0]
         exclude:
           - ruby-version: "3.0.0"
             multiverse: api
