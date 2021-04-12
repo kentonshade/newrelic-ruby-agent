@@ -320,6 +320,11 @@ jobs:  ## Rememeber run in parallel by default - see https://docs.github.com/en/
         with:
           ruby-version: ${{ matrix.ruby-version }}
 
+      ### Testing only  -nick-invision is failing
+      - name: test multiverse Tests
+        run: /
+          bundle exec rake test:multiverse[group=agent,verbose]
+
       # - name: Start mysql
       #   run: sudo systemctl start mysql
 
