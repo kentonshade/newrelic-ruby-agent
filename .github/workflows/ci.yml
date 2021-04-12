@@ -245,7 +245,7 @@ jobs:  ## Rememeber run in parallel by default - see https://docs.github.com/en/
     needs: build-ruby
     runs-on: ubuntu-18.04
     container:
-      image: kentonshade/mycirrus_1:nr-multiverse  
+      image: kentonshade/mycirrus_1:nr-multiverse-bionic  
       ## Missing packages and errors:
       ## apt-get install -y libssl-dev - installed
       ## apt-get install openjdk-8-jdk -y - installed
