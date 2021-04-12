@@ -4,13 +4,13 @@ name: Continuous Integration  ## name appear under workflows in the GHA UI
 
 on: ## Event that triggers the workflow - https://docs.github.com/en/actions/reference/events-that-trigger-workflows
   push: 
-    branches:
-      - main
-      - dev
-      - fix_ci_issues
+    branches: [ review ]
+      # - main
+      # - dev
+      # - fix_ci_issues
   pull_request:  ## nothing configured here
-  schedule:  ## Scheduled run of build per syntax below:
-    - cron:  '0 9 * * *'  ## min, hour, day, month, day of week - this should run every day at 9am - confirm...
+  # schedule:  ## Scheduled run of build per syntax below:
+  #   - cron:  '0 9 * * *'  ## min, hour, day, month, day of week - this should run every day at 9am - confirm...
 
 jobs:  ## Rememeber run in parallel by default - see https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobs
   build-ruby:  ## Job ID, no job name designated
@@ -23,7 +23,7 @@ jobs:  ## Rememeber run in parallel by default - see https://docs.github.com/en/
 
       - name: Build Ruby ${{ matrix.ruby-version }}
         uses: ./.github/actions/build-ruby  ## Uses action defined in this directory, requitred metadata file: action.yml - inquire as to the use of the JavaAcript (index.js)
-        with:  ## Map of input parameters as key:value pais, set as ENV variables
+        with:  ## Map of input parameters as key:value pairs, set as ENV variables
           ruby-version: ${{ matrix.ruby-version }}  ## Resulting ENV variable: INPUT_RUBY-VERSION - check this, ENV variable values changes with each matrix run?
 
   mini-env: ## sequential given the depenedency below (needs build-ruby)
