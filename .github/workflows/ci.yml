@@ -156,145 +156,48 @@ jobs:  ## Rememeber run in parallel by default - see https://docs.github.com/en/
   
 
 
-  ## Original Job        
-  # multiverse: ## kds - run this multiverse section to test for build times
-  #   needs: build-ruby
-  #   runs-on: ubuntu-18.04
-  #   services:  ## kds - separate images being used for these services, each requiring download?  Propose Custom Docker image with all services available?
-  #     redis:
-  #       image: redis
-  #       ports:
-  #         - 6379:6379
-  #       options: >-
-  #         --health-cmd "redis-cli ping"
-  #         --health-interval 10s
-  #         --health-timeout 5s
-  #         --health-retries 5
-  #     mongodb:
-  #       image: mongo
-  #       ports:
-  #         - 27017:27017
-  #     rabbitmq:
-  #       image: rabbitmq:latest
-  #       ports:
-  #         - 5672:5672
-  #       options: >-
-  #         --health-cmd "rabbitmqctl node_health_check"
-  #         --health-interval 10s
-  #         --health-timeout 5s
-  #         --health-retries 5
-  #     memcached:
-  #       image: memcached:latest
-  #       ports:
-  #         - 11211:11211
-  #       options: >-
-  #         --health-cmd "timeout 5 bash -c 'cat < /dev/null > /dev/udp/127.0.0.1/11211'"
-  #         --health-interval 10s
-  #         --health-timeout 5s
-  #         --health-retries 5
-
-  #   strategy:
-  #     fail-fast: false
-  #     matrix:
-  #       multiverse: [agent, api, background, background_2, database, httpclients, rails, rails_extras, rest, serialization, sinatra]
-  #       ruby-version: [2.2.10, 2.3.8, 2.4.10, 2.5.8, 2.6.6, 2.7.1, 3.0.0, jruby-9.2.12.0]
-  #       exclude:
-  #         - ruby-version: "3.0.0"
-  #           multiverse: api
-  #         - ruby-version: "3.0.0"
-  #           multiverse: sinatra
-  #         - ruby-version: "3.0.0"
-  #           multiverse: rails
-  #         - ruby-version: "3.0.0"
-  #           multiverse: rails_extras
-  #         - ruby-version: "2.7.1"
-  #           multiverse: api
-  #         - ruby-version: "2.7.1"
-  #           multiverse: sinatra
-  #         - ruby-version: "jruby-9.2.12.0"
-  #           multiverse: agent
-  #   steps:
-  #     - uses: actions/checkout@v2
-
-  #     - name: Build Ruby ${{ matrix.ruby-version }}
-  #       uses: ./.github/actions/build-ruby
-  #       with:
-  #         ruby-version: ${{ matrix.ruby-version }}
-
-  #     - name: Start mysql
-  #       run: sudo systemctl start mysql
-
-  #     - name: Run Multiverse Tests
-  #       uses: nick-invision/retry@v1.0.0
-  #       with:
-  #         timeout_minutes: 60
-  #         max_attempts: 2
-  #         command:  bundle exec rake test:multiverse[group=${{ matrix.multiverse }},verbose]
-  #       env:
-  #         DB_PORT: 3306
-  #         MYSQL_PASSWORD: root
-
-  #     - name: Annotate errors
-  #       if: ${{ failure() }}
-  #       uses: ./.github/actions/annotate
-
-  
-
-  ## New Multiverse Job        
+  # Original Job        
   multiverse: ## kds - run this multiverse section to test for build times
     needs: build-ruby
     runs-on: ubuntu-18.04
-    container:
-      image: kentonshade/mycirrus_1:nr-multiverse-bionic  
-      ## Missing packages and errors:
-      ## apt-get install -y libssl-dev - installed
-      ## apt-get install openjdk-8-jdk -y - installed
-      ## zlib1g-dev - installed
-      ## libyaml -  installed libyaml-0-2
-      # Updated image now appears to be working.
-      credentials:
-         username: ${{ secrets.DOCKER_USER }}
-         password: ${{ secrets.DOCKER_PASS }}
-    # services:  ## kds - separate images being used for these services, each requiring download?  Propose Custom Docker image with all services available?
-    #   redis:
-    #     image: redis
-    #     ports:
-    #       - 6379:6379
-    #     options: >-
-    #       --health-cmd "redis-cli ping"
-    #       --health-interval 10s
-    #       --health-timeout 5s
-    #       --health-retries 5
-    #   mongodb:
-    #     image: mongo
-    #     ports:
-    #       - 27017:27017
-    #   rabbitmq:
-    #     image: rabbitmq:latest
-    #     ports:
-    #       - 5672:5672
-    #     options: >-
-    #       --health-cmd "rabbitmqctl node_health_check"
-    #       --health-interval 10s
-    #       --health-timeout 5s
-    #       --health-retries 5
-    #   memcached:
-    #     image: memcached:latest
-    #     ports:
-    #       - 11211:11211
-    #     options: >-
-    #       --health-cmd "timeout 5 bash -c 'cat < /dev/null > /dev/udp/127.0.0.1/11211'"
-    #       --health-interval 10s
-    #       --health-timeout 5s
-    #       --health-retries 5
+    services:  ## kds - separate images being used for these services, each requiring download?  Propose Custom Docker image with all services available?
+      redis:
+        image: redis
+        ports:
+          - 6379:6379
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+      mongodb:
+        image: mongo
+        ports:
+          - 27017:27017
+      rabbitmq:
+        image: rabbitmq:latest
+        ports:
+          - 5672:5672
+        options: >-
+          --health-cmd "rabbitmqctl node_health_check"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+      memcached:
+        image: memcached:latest
+        ports:
+          - 11211:11211
+        options: >-
+          --health-cmd "timeout 5 bash -c 'cat < /dev/null > /dev/udp/127.0.0.1/11211'"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
 
     strategy:
       fail-fast: false
       matrix:
-        ## multiverse: [agent, api, background, background_2, database, httpclients, rails, rails_extras, rest, serialization, sinatra]
-        multiverse: [agent, api]  ## Reducing for testing
-        ## ruby-version: [2.2.10, 2.3.8, 2.4.10, 2.5.8, 2.6.6, 2.7.1, 3.0.0, jruby-9.2.12.0]
-        ruby-version: [2.5.8, 2.6.6, 2.7.1, 3.0.0, jruby-9.2.12.0]
+        multiverse: [agent, api, background, background_2, database, httpclients, rails, rails_extras, rest, serialization, sinatra]
+        ruby-version: [2.2.10, 2.3.8, 2.4.10, 2.5.8, 2.6.6, 2.7.1, 3.0.0, jruby-9.2.12.0]
         exclude:
           - ruby-version: "3.0.0"
             multiverse: api
@@ -313,23 +216,18 @@ jobs:  ## Rememeber run in parallel by default - see https://docs.github.com/en/
     steps:
       - uses: actions/checkout@v2
 
-      ## NEW
-      - name: Multiverse Starting Services
-        run: .github/workflows/scripts/multiverse-start-services.sh
-
       - name: Build Ruby ${{ matrix.ruby-version }}
         uses: ./.github/actions/build-ruby
         with:
           ruby-version: ${{ matrix.ruby-version }}
 
-      ### Testing only  -nick-invision is failing
-      # - name: test multiverse Tests
-      #   run: /
-      #     chmod -R u+x /__w/_temp/
-      #     bundle exec rake test:multiverse[group=agent,verbose]
+      - name: Start mysql
+        run: sudo systemctl start mysql
 
-      # - name: Start mysql
-      #   run: sudo systemctl start mysql
+      ## Trying to grab local gems installed
+      - name: Local Gems installed
+        run: /
+          gem list local
 
       - name: Run Multiverse Tests
         uses: nick-invision/retry@v1.0.0
@@ -337,13 +235,120 @@ jobs:  ## Rememeber run in parallel by default - see https://docs.github.com/en/
           timeout_minutes: 60
           max_attempts: 2
           command:  bundle exec rake test:multiverse[group=${{ matrix.multiverse }},verbose]
-        env: ## kds -should not be necessary?
+        env:
           DB_PORT: 3306
           MYSQL_PASSWORD: root
 
       - name: Annotate errors
         if: ${{ failure() }}
         uses: ./.github/actions/annotate
+
+  
+
+  # ## New Multiverse Job        
+  # multiverse: ## kds - run this multiverse section to test for build times
+  #   needs: build-ruby
+  #   runs-on: ubuntu-18.04
+  #   container:
+  #     image: kentonshade/mycirrus_1:nr-multiverse-bionic
+  #     ## Missing packages and errors:
+  #     ## apt-get install -y libssl-dev - installed
+  #     ## apt-get install openjdk-8-jdk -y - installed
+  #     ## zlib1g-dev - installed
+  #     ## libyaml -  installed libyaml-0-2
+  #     # Updated image now appears to be working.
+  #     credentials:
+  #        username: ${{ secrets.DOCKER_USER }}
+  #        password: ${{ secrets.DOCKER_PASS }}
+  #   # services:  ## kds - separate images being used for these services, each requiring download?  Propose Custom Docker image with all services available?
+  #   #   redis:
+  #   #     image: redis
+  #   #     ports:
+  #   #       - 6379:6379
+  #   #     options: >-
+  #   #       --health-cmd "redis-cli ping"
+  #   #       --health-interval 10s
+  #   #       --health-timeout 5s
+  #   #       --health-retries 5
+  #   #   mongodb:
+  #   #     image: mongo
+  #   #     ports:
+  #   #       - 27017:27017
+  #   #   rabbitmq:
+  #   #     image: rabbitmq:latest
+  #   #     ports:
+  #   #       - 5672:5672
+  #   #     options: >-
+  #   #       --health-cmd "rabbitmqctl node_health_check"
+  #   #       --health-interval 10s
+  #   #       --health-timeout 5s
+  #   #       --health-retries 5
+  #   #   memcached:
+  #   #     image: memcached:latest
+  #   #     ports:
+  #   #       - 11211:11211
+  #   #     options: >-
+  #   #       --health-cmd "timeout 5 bash -c 'cat < /dev/null > /dev/udp/127.0.0.1/11211'"
+  #   #       --health-interval 10s
+  #   #       --health-timeout 5s
+  #   #       --health-retries 5
+
+  #   strategy:
+  #     fail-fast: false
+  #     matrix:
+  #       ## multiverse: [agent, api, background, background_2, database, httpclients, rails, rails_extras, rest, serialization, sinatra]
+  #       multiverse: [agent, api]  ## Reducing for testing
+  #       ruby-version: [2.2.10, 2.3.8, 2.4.10, 2.5.8, 2.6.6, 2.7.1, 3.0.0, jruby-9.2.12.0]
+  #       ## ruby-version: [2.5.8, 2.6.6, 2.7.1, 3.0.0, jruby-9.2.12.0]
+  #       exclude:
+  #         - ruby-version: "3.0.0"
+  #           multiverse: api
+  #         - ruby-version: "3.0.0"
+  #           multiverse: sinatra
+  #         - ruby-version: "3.0.0"
+  #           multiverse: rails
+  #         - ruby-version: "3.0.0"
+  #           multiverse: rails_extras
+  #         - ruby-version: "2.7.1"
+  #           multiverse: api
+  #         - ruby-version: "2.7.1"
+  #           multiverse: sinatra
+  #         - ruby-version: "jruby-9.2.12.0"
+  #           multiverse: agent
+  #   steps:
+  #     - uses: actions/checkout@v2
+
+  #     ## NEW
+  #     - name: Multiverse Starting Services
+  #       run: .github/workflows/scripts/multiverse-start-services.sh
+
+  #     - name: Build Ruby ${{ matrix.ruby-version }}
+  #       uses: ./.github/actions/build-ruby
+  #       with:
+  #         ruby-version: ${{ matrix.ruby-version }}
+
+  #     ### Testing only  -nick-invision is failing
+  #     # - name: test multiverse Tests
+  #     #   run: /
+  #     #     chmod -R u+x /__w/_temp/
+  #     #     bundle exec rake test:multiverse[group=agent,verbose]
+
+  #     # - name: Start mysql
+  #     #   run: sudo systemctl start mysql
+
+  #     - name: Run Multiverse Tests
+  #       uses: nick-invision/retry@v1.0.0
+  #       with:
+  #         timeout_minutes: 60
+  #         max_attempts: 2
+  #         command:  bundle exec rake test:multiverse[group=${{ matrix.multiverse }},verbose]
+  #       env: ## kds -should not be necessary?
+  #         DB_PORT: 3306
+  #         MYSQL_PASSWORD: root
+
+  #     - name: Annotate errors
+  #       if: ${{ failure() }}
+  #       uses: ./.github/actions/annotate
 
   
 
