@@ -4,7 +4,7 @@ name: Continuous Integration  ## name appear under workflows in the GHA UI
 
 on: ## Event that triggers the workflow - https://docs.github.com/en/actions/reference/events-that-trigger-workflows
   push: 
-    branches: [ review ]
+    branches: [ main ]  ## changin to test poc build
       # - main
       # - dev
       # - fix_ci_issues
