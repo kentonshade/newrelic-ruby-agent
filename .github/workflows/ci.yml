@@ -226,8 +226,7 @@ jobs:  ## Rememeber run in parallel by default - see https://docs.github.com/en/
 
       ## Trying to grab local gems installed
       - name: Local Gems installed
-        run: /
-          gem list local
+        run: gem list --local
 
       - name: Run Multiverse Tests
         uses: nick-invision/retry@v1.0.0
