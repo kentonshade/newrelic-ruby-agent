@@ -6,7 +6,9 @@ name: Repolinter Action
 # Currently there is no elegant way to specify the default
 # branch in the event filtering, so branches are instead
 # filtered in the "Test Default Branch" step.
-on: [push, workflow_dispatch]
+## Disabling for my fork
+#on: [push, workflow_dispatch]
+on: [ pull_request ]
 
 # commenting out for now.
 jobs:
