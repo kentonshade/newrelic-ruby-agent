@@ -19,9 +19,9 @@ jobs:  ## Rememeber run in parallel by default - see https://docs.github.com/en/
     steps:
       - uses: actions/checkout@v2
 
-      - name: 01 Command check
-        run: ls -la && (cd /3.0.0 && rbenv local)
+      - name: 01 Command check ## need to add path variables
+        run: ls -la && (cd /3.0.0 && /root/.rbenv/bin/rbenv local)
 
-      - name: 02 list gems
-        run: ls -la && (cd /3.0.0 && RBENV_VERSION=3.0.0 rbenv exec gem list --local)
+      - name: 02 list gems  ## need to add path avariables
+        run: ls -la && (cd /3.0.0 && RBENV_VERSION=3.0.0 /root/.rbenv/bin/rbenv exec gem list --local)
 
