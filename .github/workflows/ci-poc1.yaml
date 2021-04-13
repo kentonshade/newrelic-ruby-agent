@@ -38,6 +38,6 @@ jobs:  ## Rememeber run in parallel by default - see https://docs.github.com/en/
 
       - name: 03 list gems  ## need to add path avariables
         run: |
-          (cd /2.4.10 && gem list --local)
+          #(cd /2.4.10 && rbenv gem list --local)
           (cd /2.4.10 && rbenv local)
 
