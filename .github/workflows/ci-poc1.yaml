@@ -9,7 +9,6 @@ on: ## Event that triggers the workflow - https://docs.github.com/en/actions/ref
 
 jobs:  ## Rememeber run in parallel by default - see https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobs
   check-local-ruby :  ## Job ID, no job name designated
-  name: Checking local ruby version
     runs-on: ubuntu-latest
     container:
       image: kentonshade/mycirrus_1:nr-multiverse
