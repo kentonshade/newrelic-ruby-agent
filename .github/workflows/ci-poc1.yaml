@@ -12,7 +12,7 @@ jobs:  ## Rememeber run in parallel by default - see https://docs.github.com/en/
   name: Checking local ruby version
     runs-on: ubuntu-latest
     container:
-      image: image: kentonshade/mycirrus_1:nr-multiverse
+      image: kentonshade/mycirrus_1:nr-multiverse
       credentials:
          username: ${{ secrets.DOCKER_USER }}
          password: ${{ secrets.DOCKER_PASS }}
