@@ -1,9 +1,8 @@
 #!/bin/bash
 set -xv
 ## Environment
-cd
-ls -la
-cd /__w/newrelic-ruby-agent/newrelic-ruby-agent
+whoami
+echo "$USER"
 HOME=/root
 cat /root/.bashrc
 source /root/.bashrc
