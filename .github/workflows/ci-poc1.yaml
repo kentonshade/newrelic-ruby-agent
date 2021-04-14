@@ -34,10 +34,12 @@ jobs:  ## Rememeber run in parallel by default - see https://docs.github.com/en/
         run: printenv
 
       - name: 02 Command check ## need to add path variables
-        run: ls -la && (cd /3.0.0 && rbenv local)
+        run: |
+          ls -la && (cd /3.0.0 && rbenv local)
+          (cd /3.0.0 && rbenv exec gem list --local)
 
       - name: 03 list gems  ## need to add path avariables
         run: |
-          #(cd /2.4.10 && rbenv gem list --local)
           (cd /2.4.10 && rbenv local)
+          (cd /2.4.10 && rbenv exec gem list --local)
 
