@@ -27,6 +27,7 @@ jobs:  ## Rememeber run in parallel by default - see https://docs.github.com/en/
 
       - name: 01 Source required files  ## add everything here to script files.
         run: |
+          . /root/.bashrc
           cat .github/workflows/scripts/source-and-env-variables.sh
           .github/workflows/scripts/source-and-env-variables.sh
           printenv | grep 'PATH'
