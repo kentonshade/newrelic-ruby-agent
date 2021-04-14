@@ -11,7 +11,7 @@ jobs:  ## Rememeber run in parallel by default - see https://docs.github.com/en/
     defaults:
       run:
         shell: bash
-        working-directory: /root
+        # working-directory: /root
     container:
       image: kentonshade/mycirrus_1:nr-multiverse-sq1 ## changing image
       credentials:
