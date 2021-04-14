@@ -1,0 +1,58 @@
+## CI POC2
+name: CI POC2
+
+on: ## Event that triggers the workflow - https://docs.github.com/en/actions/reference/events-that-trigger-workflows
+  push: 
+    branches: [ review ]
+
+jobs:  ## Rememeber run in parallel by default - see https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobs
+  check-local-ruby :  ## Job ID, no job name designated
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+        working-directory: /root
+    container:
+      image: kentonshade/mycirrus_1:nr-multiverse-sq1 ## changing image
+      credentials:
+         username: ${{ secrets.DOCKER_USER }}
+         password: ${{ secrets.DOCKER_PASS }}
+
+    steps:
+      - uses: actions/checkout@v2
+      # - name: set paths  ## add everything here to script files.
+      #   run: |
+      #     echo "/root/.rbenv/bin" >> $GITHUB_PATH
+      #     echo "/root/.rbenv/plugins/ruby-build/bin" >> $GITHUB_PATH
+
+      - name: 01 Source required files  ## add everything here to script files.
+        run: |
+          cat .github/workflows/scripts/source-and-env-variables.sh
+          .github/workflows/scripts/source-and-env-variables.sh
+          printenv | grep 'PATH'
+
+
+
+
+
+      # - name: 02 set path variables ## need to add path variables
+      #   run: printenv
+
+      # - name: 02 Command check ## need to add path variables
+      #   run: |
+      #     printenv
+      #     ## Set the ruby version via rbenv shell
+      #     eval "$(rbenv init -)"
+      #     rbenv shell 3.0.0
+      #     ruby -v
+      #     bundle --verion
+      #     rbenv shell -
+      #     ruby -v
+      #     # ls -la && (cd /3.0.0 && rbenv local)
+      #     # (cd /3.0.0 && gem list --local)  ## checking command without rbenv exec
+      #     # (cd /3.0.0 && rbenv exec bundle --version)
+
+      # - name: 03 list gems  ## need to add path avariables
+      #   run: |
+      #     (cd /2.4.10 && rbenv local)
+      #     (cd /2.4.10 && gem list --local) ## do not use the rbenv command for gem, that is for THIS command.
