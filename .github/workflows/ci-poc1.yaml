@@ -138,7 +138,7 @@ jobs:  ## Rememeber run in parallel by default - see https://docs.github.com/en/
 
       - name: Run Multiverse Tests
         run: |
-          (cd /2.4.10 && bundle --help)
+          (cd /2.4.10 && rbenv exec bundle --version)
         # uses: nick-invision/retry@v1.0.0
         # with:
         #   timeout_minutes: 60
