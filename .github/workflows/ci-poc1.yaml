@@ -46,8 +46,8 @@ jobs:  ## Rememeber run in parallel by default - see https://docs.github.com/en/
 
   # ## New Multiverse Job        
   multiverse: ## kds - run this multiverse section to test for build times
-    needs: build-ruby
-    runs-on: ubuntu-18.04
+    # needs: build-ruby
+    runs-on: ubuntu-latest
     container:
       image: kentonshade/mycirrus_1:nr-multiverse-sq1
       ## Missing packages and errors:
