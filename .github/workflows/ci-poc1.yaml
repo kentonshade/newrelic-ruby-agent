@@ -36,9 +36,15 @@ jobs:  ## Rememeber run in parallel by default - see https://docs.github.com/en/
       - name: 02 Command check ## need to add path variables
         run: |
           printenv
-          ls -la && (cd /3.0.0 && rbenv local)
-          (cd /3.0.0 && gem list --local)  ## checking command without rbenv exec
-          (cd /3.0.0 && rbenv exec bundle --version)
+          ## Set the ruby version via rbrnv shell
+          rbenv shell 3.0.0
+          ruby -v
+          bundle --verion
+          rbenv shell -
+          ruby -v
+          # ls -la && (cd /3.0.0 && rbenv local)
+          # (cd /3.0.0 && gem list --local)  ## checking command without rbenv exec
+          # (cd /3.0.0 && rbenv exec bundle --version)
 
       - name: 03 list gems  ## need to add path avariables
         run: |
@@ -50,27 +56,26 @@ jobs:  ## Rememeber run in parallel by default - see https://docs.github.com/en/
       - name: Multiverse Starting Services
         run: |
           printenv
-          echo "/root/.rbenv/bin" >> $GITHUB_PATH
-          echo "/root/.rbenv/plugins/ruby-build/bin" >> $GITHUB_PATH
-          .github/workflows/scripts/multiverse-start-services.sh
-          printenv
+          # echo "/root/.rbenv/bin" >> $GITHUB_PATH
+          # echo "/root/.rbenv/plugins/ruby-build/bin" >> $GITHUB_PATH
+          # .github/workflows/scripts/multiverse-start-services.sh
           whereis rbenv
           (cd /2.4.10 && rbenv exec bundle --version)
 
-      - name: Run Multiverse Tests
-        run: |
-          printenv
-          whereis rbenv
-          (cd /2.4.10 && rbenv exec bundle --version)
-        # uses: nick-invision/retry@v1.0.0
-        # with:
-        #   timeout_minutes: 60
-        #   max_attempts: 2
-        #   # command:  bundle exec rake test:multiverse[group=${{ matrix.multiverse }},verbose]
-        #   command:  (cd /2.4.10 && bundle exec rake test:multiverse[group=agent,verbose])
-        env: ## kds -should not be necessary?
-          DB_PORT: 3306
-          MYSQL_PASSWORD: root
+      # - name: Run Multiverse Tests
+      #   run: |
+      #     printenv
+      #     whereis rbenv
+      #     (cd /2.4.10 && rbenv exec bundle --version)
+      #   # uses: nick-invision/retry@v1.0.0
+      #   # with:
+      #   #   timeout_minutes: 60
+      #   #   max_attempts: 2
+      #   #   # command:  bundle exec rake test:multiverse[group=${{ matrix.multiverse }},verbose]
+      #   #   command:  (cd /2.4.10 && bundle exec rake test:multiverse[group=agent,verbose])
+      #   env: ## kds -should not be necessary?
+      #     DB_PORT: 3306
+      #     MYSQL_PASSWORD: root
 
 
   # ## New Multiverse Job        
