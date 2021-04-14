@@ -135,16 +135,30 @@ jobs:  ## Rememeber run in parallel by default - see https://docs.github.com/en/
       # - name: Start mysql
       #   run: sudo systemctl start mysql
 
+
       - name: Run Multiverse Tests
-        uses: nick-invision/retry@v1.0.0
-        with:
-          timeout_minutes: 60
-          max_attempts: 2
-          # command:  bundle exec rake test:multiverse[group=${{ matrix.multiverse }},verbose]
-          command:  (cd /2.4.10 && bundle exec rake test:multiverse[group=agent,verbose])
+        run: |
+          (cd /2.4.10 && bundle --help)
+        # uses: nick-invision/retry@v1.0.0
+        # with:
+        #   timeout_minutes: 60
+        #   max_attempts: 2
+        #   # command:  bundle exec rake test:multiverse[group=${{ matrix.multiverse }},verbose]
+        #   command:  (cd /2.4.10 && bundle exec rake test:multiverse[group=agent,verbose])
         env: ## kds -should not be necessary?
           DB_PORT: 3306
           MYSQL_PASSWORD: root
+
+      # - name: Run Multiverse Tests
+      #   uses: nick-invision/retry@v1.0.0
+      #   with:
+      #     timeout_minutes: 60
+      #     max_attempts: 2
+      #     # command:  bundle exec rake test:multiverse[group=${{ matrix.multiverse }},verbose]
+      #     command:  (cd /2.4.10 && bundle exec rake test:multiverse[group=agent,verbose])
+      #   env: ## kds -should not be necessary?
+      #     DB_PORT: 3306
+      #     MYSQL_PASSWORD: root
 
       - name: Annotate errors
         if: ${{ failure() }}
