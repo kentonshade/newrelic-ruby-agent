@@ -140,6 +140,9 @@ jobs:  ## Rememeber run in parallel by default - see https://docs.github.com/en/
         run: |
           echo "/root/.rbenv/bin" >> $GITHUB_PATH
           echo "/root/.rbenv/plugins/ruby-build/bin" >> $GITHUB_PATH
+          .github/workflows/scripts/source-and-env-variables.sh 
+          printenv
+          whereis rbenv
           (cd /2.4.10 && rbenv exec bundle --version)
         # uses: nick-invision/retry@v1.0.0
         # with:
