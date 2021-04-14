@@ -36,7 +36,8 @@ jobs:  ## Rememeber run in parallel by default - see https://docs.github.com/en/
       - name: 02 Command check ## need to add path variables
         run: |
           printenv
-          ## Set the ruby version via rbrnv shell
+          ## Set the ruby version via rbenv shell
+          eval "$(rbenv init -)"
           rbenv shell 3.0.0
           ruby -v
           bundle --verion
