@@ -21,10 +21,10 @@ jobs:  ## Rememeber run in parallel by default - see https://docs.github.com/en/
 
     steps:
       - uses: actions/checkout@v2
-      - name: set paths  ## add everything here to script files.
-        run: |
-          echo "/root/.rbenv/bin" >> $GITHUB_PATH
-          echo "/root/.rbenv/plugins/ruby-build/bin" >> $GITHUB_PATH
+      # - name: set paths  ## add everything here to script files.
+      #   run: |
+      #     echo "/root/.rbenv/bin" >> $GITHUB_PATH
+      #     echo "/root/.rbenv/plugins/ruby-build/bin" >> $GITHUB_PATH
 
       - name: 01 Source required files  ## add everything here to script files.
         run: |
