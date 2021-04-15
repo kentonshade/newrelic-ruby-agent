@@ -7,17 +7,17 @@ on: ## Event that triggers the workflow - https://docs.github.com/en/actions/ref
 
 jobs:  ## Rememeber run in parallel by default - see https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobs
   container-testing :  ## Job ID, no job name designated
-    runs-on: ubuntu-latest
+    runs-on: gha-ruby-runner-poc1
     # defaults:
     #   run:
     #     shell: bash
         # working-directory: /root
-    container:
-      # image: kentonshade/mycirrus_1:nr-multiverse-sq1 ## changing image
-      image: kentonshade/mycirrus_1:nr-multiverse-sq3 ## changing image
-      credentials:
-         username: ${{ secrets.DOCKER_USER }}
-         password: ${{ secrets.DOCKER_PASS }}
+    # container:
+    #   # image: kentonshade/mycirrus_1:nr-multiverse-sq1 ## changing image
+    #   image: kentonshade/mycirrus_1:nr-multiverse-sq3 ## changing image
+    #   credentials:
+    #      username: ${{ secrets.DOCKER_USER }}
+    #      password: ${{ secrets.DOCKER_PASS }}
 
     steps:
       - uses: actions/checkout@v2
