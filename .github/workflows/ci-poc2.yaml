@@ -40,7 +40,6 @@ jobs:  ## Rememeber run in parallel by default - see https://docs.github.com/en/
         shell: bash
         # working-directory: /root
     container:
-      # image: kentonshade/mycirrus_1:nr-multiverse-sq1 ## changing image
       image: kentonshade/mycirrus_1:nr-multiverse-sq3 ## changing image
       credentials:
          username: ${{ secrets.DOCKER_USER }}
