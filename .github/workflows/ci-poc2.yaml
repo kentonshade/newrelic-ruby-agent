@@ -61,7 +61,13 @@ jobs:  ## Rememeber run in parallel by default - see https://docs.github.com/en/
           # source /root/.bashrc
           # cat .github/workflows/scripts/source-and-env-variables.sh
           # .github/workflows/scripts/source-and-env-variables.sh
-            printenv | grep 'PATH'
+            printenv
+
+      - name: 02 concurrency test  ## add everything here to script files.
+        run: |
+          rbenv install --list-all
+          rbenv install 2.4.10
+          ruby -v
 
 
 
