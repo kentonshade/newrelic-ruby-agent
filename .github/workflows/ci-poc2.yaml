@@ -8,9 +8,9 @@ on: ## Event that triggers the workflow - https://docs.github.com/en/actions/ref
 jobs:  ## Rememeber run in parallel by default - see https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobs
   container-testing :  ## Job ID, no job name designated
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        shell: bash
+    # defaults:
+    #   run:
+    #     shell: bash
         # working-directory: /root
     container:
       # image: kentonshade/mycirrus_1:nr-multiverse-sq1 ## changing image
@@ -30,7 +30,7 @@ jobs:  ## Rememeber run in parallel by default - see https://docs.github.com/en/
         run: |
           # source /root/.bashrc
           # cat .github/workflows/scripts/source-and-env-variables.sh
-          # .github/workflows/scripts/source-and-env-variables.sh
+          .github/workflows/scripts/source-and-env-variables.sh
           printenv | grep 'PATH'
 
   container-testing-2 :  ## Job ID, no job name designated
