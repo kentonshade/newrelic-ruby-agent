@@ -1,9 +1,9 @@
 #!/bin/bash
 ## start all required services
 set -xv
-service rabbitmq-server start
-service redis-server start
-service mongodb start
-service memcached start
-service mysql start
+sudo service rabbitmq-server start
+sudo service redis-server start
+sudo service mongodb start
+sudo service memcached start
+sudo service mysql start
 
