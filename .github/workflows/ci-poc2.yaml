@@ -34,7 +34,7 @@ jobs:  ## Rememeber run in parallel by default - see https://docs.github.com/en/
       - name: 02 testing install time for rbenv ## add everything here to script files.
         run: |
           rbenv install --list-all
-          time rbenv install 3.0.0
+          rbenv global 3.0.0
           ruby -v
 
   container-testing-2 :  ## Job ID, no job name designated
