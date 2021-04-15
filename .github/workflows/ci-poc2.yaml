@@ -33,10 +33,12 @@ jobs:  ## Rememeber run in parallel by default - see https://docs.github.com/en/
 
       - name: 02 testing install time for rbenv ## add everything here to script files.
         run: |
+          pwd
           ls -la
           rbenv install --list-all
           rbenv global
           ruby -v
+          .github/workflows/scripts/multiverse-start-services.sh
 
   container-testing-2 :  ## Job ID, no job name designated
     runs-on: self-hosted
@@ -66,6 +68,7 @@ jobs:  ## Rememeber run in parallel by default - see https://docs.github.com/en/
 
       - name: 02 concurrency test  ## add everything here to script files.
         run: |
+          pwd
           ls -la
           rbenv install --list-all
           #rbenv install 2.4.10
