@@ -15,7 +15,7 @@ jobs:  ## Rememeber run in parallel by default - see https://docs.github.com/en/
        - uses: actions/checkout@v2
 
        - name: Build Ruby ${{ matrix.ruby-version }}
-         uses: actions-runner/_work/newrelic-ruby-agent/newrelic-ruby-agent/.github/actions/build-ruby  ## Uses action defined in this directory, requitred metadata file: action.yml - inquire as to the use of the JavaAcript (index.js)
+         uses: ./.github/actions/build-ruby  ## Uses action defined in this directory, requitred metadata file: action.yml - inquire as to the use of the JavaAcript (index.js)
          with:  ## Map of input parameters as key:value pairs, set as ENV variables
            ruby-version: ${{ matrix.ruby-version }}  ## Resulting ENV variable: INPUT_RUBY-VERSION - check this, ENV variable values changes with each matrix run?
 
