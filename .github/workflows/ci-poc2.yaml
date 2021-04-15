@@ -7,7 +7,7 @@ on: ## Event that triggers the workflow - https://docs.github.com/en/actions/ref
 
 jobs:  ## Rememeber run in parallel by default - see https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobs
   container-testing :  ## Job ID, no job name designated
-    runs-on: gha-ruby-runner-poc1
+    runs-on: self-hosted
     # defaults:
     #   run:
     #     shell: bash
