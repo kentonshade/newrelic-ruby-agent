@@ -28,10 +28,14 @@ jobs:  ## Rememeber run in parallel by default - see https://docs.github.com/en/
 
       - name: 01 Source required files  ## add everything here to script files.
         run: |
-          # source /root/.bashrc
-          # cat .github/workflows/scripts/source-and-env-variables.sh
           .github/workflows/scripts/source-and-env-variables.sh
-          printenv | grep 'PATH'
+          printenv
+
+      - name: 02 testing install time for rbenv ## add everything here to script files.
+        run: |
+          rbenv install --list-all
+          rbenv install 3.0.0
+          ruby -v
 
   container-testing-2 :  ## Job ID, no job name designated
     runs-on: ubuntu-latest
