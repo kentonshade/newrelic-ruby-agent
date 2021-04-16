@@ -90,7 +90,9 @@ jobs:  ## Rememeber run in parallel by default - see https://docs.github.com/en/
 
       - name: Run Multiverse Tests
         run: |
-          rbenv shell 2.4.10
+          # rbenv shell 2.4.10
+          ruby shell -init
+          rbenv global 2.4.10
           ruby -v
           bundle exec rake test:multiverse[group=agent,verbose]
         # uses: nick-invision/retry@v1.0.0
