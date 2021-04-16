@@ -88,7 +88,7 @@ jobs:  ## Rememeber run in parallel by default - see https://docs.github.com/en/
     steps:
       - uses: actions/checkout@v2
 
-      - name: Run Multiverse Tests
+      - name: Run Multiverse Tests - {{ matrix.ruby-version }}
         uses: nick-invision/retry@v1.0.0
         with:
           timeout_minutes: 60
