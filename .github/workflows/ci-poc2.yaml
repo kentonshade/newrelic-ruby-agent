@@ -8,71 +8,33 @@ on: ## Event that triggers the workflow - https://docs.github.com/en/actions/ref
 jobs:  ## Rememeber run in parallel by default - see https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobs
   container-testing :  ## Job ID, no job name designated
     runs-on: self-hosted
-    # defaults:
-    #   run:
-    #     shell: bash
-        # working-directory: /root
-    # container:
-    #   # image: kentonshade/mycirrus_1:nr-multiverse-sq1 ## changing image
-    #   image: kentonshade/mycirrus_1:nr-multiverse-sq3 ## changing image
-    #   credentials:
-    #      username: ${{ secrets.DOCKER_USER }}
-    #      password: ${{ secrets.DOCKER_PASS }}
 
     steps:
       - uses: actions/checkout@v2
-      # - name: set paths  ## add everything here to script files.
-      #   run: |
-      #     echo "/root/.rbenv/bin" >> $GITHUB_PATH
-      #     echo "/root/.rbenv/plugins/ruby-build/bin" >> $GITHUB_PATH
 
-      - name: 01 Source required files  ## add everything here to script files.
+      - name: 01 testing rbenv shell, version and gem list ## add everything here to script files.
         run: |
-          .github/workflows/scripts/source-and-env-variables.sh
-          printenv
-
-      - name: 02 testing install time for rbenv ## add everything here to script files.
-        run: |
-          pwd
-          ls -la
-          rbenv install --list-all
-          rbenv global
+          rbenv versions
+          RBENV_VERSION=2.4.10 rbenv exec gem list --local 
           ruby -v
-          .github/workflows/scripts/multiverse-start-services.sh
+          # .github/workflows/scripts/multiverse-start-services.sh # These aervice will be already running on the runner.        
 
   container-testing-2 :  ## Job ID, no job name designated
     runs-on: self-hosted
-    # defaults:
-    #   run:
-    #     shell: bash
-    #     # working-directory: /root
-    # container:
-    #   image: kentonshade/mycirrus_1:nr-multiverse-sq3 ## changing image
-    #   credentials:
-    #      username: ${{ secrets.DOCKER_USER }}
-    #      password: ${{ secrets.DOCKER_PASS }}
 
     steps:
       - uses: actions/checkout@v2
-      # - name: set paths  ## add everything here to script files.
-      #   run: |
-      #     echo "/root/.rbenv/bin" >> $GITHUB_PATH
-      #     echo "/root/.rbenv/plugins/ruby-build/bin" >> $GITHUB_PATH
 
       - name: 01 Source required files  ## add everything here to script files.
         run: |
           # source /root/.bashrc
           # cat .github/workflows/scripts/source-and-env-variables.sh
           # .github/workflows/scripts/source-and-env-variables.sh
-            printenv
 
       - name: 02 concurrency test  ## add everything here to script files.
         run: |
-          pwd
-          ls -la
-          rbenv install --list-all
-          #rbenv install 2.4.10
-          ruby -v
+          rbenv versions
+          RBENV_VERSION=3.0.0 rbenv exec gem list --local
 
 
 
