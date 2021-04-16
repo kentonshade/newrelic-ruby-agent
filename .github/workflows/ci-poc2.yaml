@@ -58,10 +58,14 @@ jobs:  ## Rememeber run in parallel by default - see https://docs.github.com/en/
 
       - name: ruby version matrix test ${{ matrix.ruby-version }}
         run: |
+          echo "superficial change to test build - 1.0"
           RBENV_VERSION=${{ matrix.ruby-version }} rbenv exec gem list --local
 
 
       
+
+  
+
 
       # - name: 02 set path variables ## need to add path variables
       #   run: printenv
