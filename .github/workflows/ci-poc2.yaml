@@ -91,8 +91,8 @@ jobs:  ## Rememeber run in parallel by default - see https://docs.github.com/en/
       - name: Run Multiverse Tests
         run: |
           # rbenv shell 2.4.10
-          eval "$(rbenv init -)"
-          rbenv shell -init
+          # eval "$(rbenv init -)"
+          # rbenv shell -init
           rbenv global 2.4.10
           ruby -v
           bundle exec rake test:multiverse[group=agent,verbose]
