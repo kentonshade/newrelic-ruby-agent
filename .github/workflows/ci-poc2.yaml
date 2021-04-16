@@ -88,12 +88,14 @@ jobs:  ## Rememeber run in parallel by default - see https://docs.github.com/en/
     steps:
       - uses: actions/checkout@v2
 
-      - name: Run Multiverse Tests - {{ matrix.ruby-version }}
-        uses: nick-invision/retry@v1.0.0
-        with:
-          timeout_minutes: 60
-          max_attempts: 2
-          command:  RBENV_VERSION=${{ matrix.ruby-version }} rbenv exec bundle exec rake test:multiverse[group=${{ matrix.multiverse }},verbose]
+      - name: Run Multiverse Tests - ${{ matrix.ruby-version }}
+        run: |
+          RBENV_VERSION=${{ matrix.ruby-version }} rbenv exec bundle exec rake test:multiverse[group=${{ matrix.multiverse }},verbose]
+        # uses: nick-invision/retry@v1.0.0
+        # with:
+        #   timeout_minutes: 60
+        #   max_attempts: 2
+        #   command:  RBENV_VERSION=${{ matrix.ruby-version }} rbenv exec bundle exec rake test:multiverse[group=${{ matrix.multiverse }},verbose]
         env:
           DB_PORT: 3306
           MYSQL_PASSWORD: root
