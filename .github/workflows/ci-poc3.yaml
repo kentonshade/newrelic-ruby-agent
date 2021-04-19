@@ -143,12 +143,10 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-
-      ############################ NEW #########################
       - name: set paths  ## add everything here to script files.
         run: |
           echo "/usr/bin/wget" >> $GITHUB_PATH
-      ##########################################################
+          printenv | grep 'PATH'
 
       - name: Build Ruby ${{ matrix.ruby-version }}
         uses: ./.github/actions/build-ruby
