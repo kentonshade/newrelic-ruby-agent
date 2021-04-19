@@ -32,6 +32,11 @@ jobs:
   mini-env:
     needs: build-ruby
     runs-on: ubuntu-18.04
+    container:
+      image: kentonshade/mycirrus_1:nr-bionic-runner-1.0.0
+      credentials:
+         username: ${{ secrets.DOCKER_USER }}
+         password: ${{ secrets.DOCKER_PASS }}
     strategy:
       fail-fast: false
       matrix:
