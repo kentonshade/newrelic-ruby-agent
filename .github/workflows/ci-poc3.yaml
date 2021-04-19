@@ -148,6 +148,13 @@ jobs:
         with:
           ruby-version: ${{ matrix.ruby-version }}
 
+
+      ############################ NEW #########################
+      - name: set paths  ## add everything here to script files.
+        run: |
+          echo "/usr/bin/wget" >> $GITHUB_PATH
+      ##########################################################
+
       - name: Start mysql
         run: sudo systemctl start mysql
 
