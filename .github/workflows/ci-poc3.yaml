@@ -19,6 +19,12 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      -name: testing commands
+        run: |
+          whoami
+          printenv
+          /usr/bin/sudo apt-get update
+
       - name: Build Ruby ${{ matrix.ruby-version }}
         uses: ./.github/actions/build-ruby
         with:
