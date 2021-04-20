@@ -26,8 +26,7 @@ jobs:
 
       - name: get gem list
         run: |
-          ruby -v
-          gem list --local
+          RBENV_VERSION=${{ matrix.ruby-version }} rbenv exec gem list --local
 
   # mini-env:
   #   needs: build-ruby
