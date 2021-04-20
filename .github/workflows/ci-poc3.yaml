@@ -13,11 +13,6 @@ on:
 jobs:
   build-ruby:
     runs-on: self-hosted
-    # container:
-    #   image: kentonshade/mycirrus_1:nr-bionic-runner-1.0.0
-    #   credentials:
-    #      username: ${{ secrets.DOCKER_USER }}
-    #      password: ${{ secrets.DOCKER_PASS }}
     strategy:
       matrix:
         ruby-version: [2.2.10, 2.3.8, 2.4.10, 2.5.8, 2.6.6, 2.7.1, 3.0.0, jruby-9.2.12.0]
