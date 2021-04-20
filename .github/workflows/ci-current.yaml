@@ -26,6 +26,7 @@ jobs:
 
       - name: get gem list
         run: |
+          ruby -v
           gem list --local
 
   # mini-env:
