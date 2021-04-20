@@ -92,6 +92,7 @@ jobs:  ## Rememeber run in parallel by default - see https://docs.github.com/en/
       ## apt-get install openjdk-8-jdk -y - installed
       ## zlib1g-dev - installed
       ## libyaml -  installed libyaml-0-2
+      ## install libffi-dev
       # Updated image now appears to be working.
       credentials:
          username: ${{ secrets.DOCKER_USER }}
