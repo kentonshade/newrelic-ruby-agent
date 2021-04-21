@@ -20,6 +20,7 @@ jobs:
 
       - name: testing commands (apt)
         run: |
+          su - gha
           whoami
           printenv
           sudo apt-get update
