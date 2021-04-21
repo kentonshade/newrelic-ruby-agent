@@ -1,0 +1,30 @@
+name: CI POC4
+
+on:
+  push:
+    branches: [ review ]
+
+jobs:
+  cache-and-repo-test:
+    runs-on: ubuntu-latest
+    container:
+      image: kentonshade/newrelic-ruby:bionic-runner-2.2.0 ## changing image
+      credentials:
+         username: ${{ secrets.DOCKER_USER }}
+         password: ${{ secrets.DOCKER_PASS }}
+    # strategy:
+    #   matrix:
+    #     ruby-version: [2.2.10, 2.3.8, 2.4.10, 2.5.8, 2.6.6, 2.7.1, 3.0.0, jruby-9.2.12.0]
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: testing commands (apt)
+        run: |
+          whoami
+          printenv
+          sudo apt-get update
+
+      # - name: Build Ruby ${{ matrix.ruby-version }}
+      #   uses: ./.github/actions/build-ruby
+      #   with:
+      #     ruby-version: ${{ matrix.ruby-version }}
