@@ -149,7 +149,7 @@ jobs:
       - name: Local Gems installed
         run: |
           gem list --local
-          rails -v
+          # rails -v
 
       - name: Run Unit Tests
         uses: nick-invision/retry@v1.0.0
@@ -160,6 +160,12 @@ jobs:
         env:
           DB_PORT: 3306
           MYSQL_PASSWORD: root
+
+      ## Trying to grab local gems installed
+      - name: Local Gems installed step 2
+        run: |
+          gem list --local
+          # rails -v
 
   # multiverse:
   #   needs: build-ruby
