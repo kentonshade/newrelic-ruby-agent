@@ -38,6 +38,7 @@ jobs:
       - name: Commands 1
         run: |
           ## su - gha
+          whereis git
           cd /home/gha
           ls -la
           HOME=/home/gha
