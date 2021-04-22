@@ -24,12 +24,15 @@ jobs:
           ## su - gha
           cd /home/gha
           ls -la
-          whereis source
-          cat .bashrc
-          SOURCE=$(whereis source)
-          echo $SOURCE
-          ##$SOURCE .bashrc
+          HOME=/home/gha
+          export PATH="$HOME/bin:$PATH"
+          export PATH="$HOME.rbenv/plugins/ruby-build/bin:$PATH"
+          ##whereis source
+          ##cat .bashrc
+          ##SOURCE=$(whereis source)
+          ##echo $SOURCE
           whoami
+          echo $PATH
           printenv
           ## sudo apt-get update
 
