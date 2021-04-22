@@ -25,7 +25,8 @@ jobs:
           cd /home/gha
           ls -la 
           cat .bashrc
-          source .bashrc
+          SOURCE=$(whereis source)
+          $SOURCE .bashrc
           whoami
           printenv
           ## sudo apt-get update
