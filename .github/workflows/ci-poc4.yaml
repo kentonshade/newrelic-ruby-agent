@@ -18,7 +18,11 @@ jobs:
     #     ruby-version: [2.2.10, 2.3.8, 2.4.10, 2.5.8, 2.6.6, 2.7.1, 3.0.0, jruby-9.2.12.0]
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/kentonshade/ruby-storage-cache@master
+        with:
+          repository: kentonshade/ruby-storage-cache
+          path: storage-cache
+          ref: master
+      ## - uses: actions/kentonshade/ruby-storage-cache@master
 
       - name: testing commands (apt) ##
         run: |
