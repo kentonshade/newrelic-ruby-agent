@@ -39,6 +39,7 @@ jobs:
         run: |
           ## su - gha
           whereis git
+          git version
           cd /home/gha
           ls -la
           HOME=/home/gha
