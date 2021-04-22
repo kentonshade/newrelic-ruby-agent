@@ -1,0 +1,27 @@
+name: CI POC4
+
+on:
+  push:
+    branches: [ review ]
+
+jobs:
+  cache-and-repo-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout default
+        uses: actions/checkout@v2
+
+      - name: Checkout the Ruby Storage Cache 
+        uses: actions/checkout@v2
+        with:
+          repository: kentonshade/ruby-storage-cache
+          path: storage-cache
+          ref: master
+
+      - name: Review the workspace
+        run: |
+          cd ${GITHUB_WORKSPACE}
+          ls -la
+          du -sh storage-cache/
+          cd storage-cache
+          ls -la
