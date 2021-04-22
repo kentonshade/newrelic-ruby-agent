@@ -30,7 +30,9 @@ jobs:
       - name: Review the workspace
         run: |
           cd ${GITHUB_WORKSPACE}
-          ls -la 
+          ls -la
+          cd storage-cache
+          ls -la
 
       - name: Commands 1
         run: |
