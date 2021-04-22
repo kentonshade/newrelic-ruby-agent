@@ -27,7 +27,12 @@ jobs:
       - name: Checkout default
         uses: actions/checkout@v2
 
-      - name: testing commands (apt) ##
+      - name: Review the workspace
+        run: |
+          cd ${GITHUB_WORKSPACE}
+          ls -la 
+
+      - name: Commands 1
         run: |
           ## su - gha
           cd /home/gha
