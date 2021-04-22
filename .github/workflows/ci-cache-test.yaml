@@ -29,16 +29,17 @@ jobs:
 
       - name: Commands 1
         uses: docker://kentonshade/newrelic-ruby:bionic-runner-2.2.0
-        run: |
-          ## su - gha
-          cd /home/gha
-          ls -la
-          HOME=/home/gha
-          export PATH="$HOME/bin:$PATH"
-          export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"
-          export PATH="$HOME/.rbenv/shims:$PATH"
-          export PATH="$HOME/.rbenv/bin:$PATH"
-          rbenv versions
-          whoami
-          echo $PATH
-          printenv
+        with:
+          command: |
+            ## su - gha
+            cd /home/gha
+            ls -la
+            HOME=/home/gha
+            export PATH="$HOME/bin:$PATH"
+            export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"
+            export PATH="$HOME/.rbenv/shims:$PATH"
+            export PATH="$HOME/.rbenv/bin:$PATH"
+            rbenv versions
+            whoami
+            echo $PATH
+            printenv
