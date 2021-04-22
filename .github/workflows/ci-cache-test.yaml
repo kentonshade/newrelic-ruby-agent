@@ -32,6 +32,8 @@ jobs:
         with:
           command: |
             ## su - gha
+            cd ${GITHUB_WORKSPACE}
+            ls -la 
             cd /home/gha
             ls -la
             HOME=/home/gha
