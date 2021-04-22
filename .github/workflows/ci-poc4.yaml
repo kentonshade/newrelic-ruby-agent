@@ -9,6 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: kentonshade/newrelic-ruby:bionic-runner-2.2.0 ## changing image
+      options: --user gha
       credentials:
          username: ${{ secrets.DOCKER_USER }}
          password: ${{ secrets.DOCKER_PASS }}
@@ -20,7 +21,7 @@ jobs:
 
       - name: testing commands (apt) ##
         run: |
-          su - gha
+          ## su - gha
           whoami
           printenv
           sudo apt-get update
