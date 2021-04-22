@@ -1,4 +1,4 @@
-name: CI POC4
+name: CI CACHE TEST
 
 on:
   push:
