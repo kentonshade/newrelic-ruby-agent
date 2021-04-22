@@ -29,7 +29,7 @@ jobs:
           export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"
           export PATH="$HOME/.rbenv/shims:$PATH"
           export PATH="$HOME/.rbenv/bin:$PATH"
-          rbenv verions
+          rbenv versions
           ##whereis source
           ##cat .bashrc
           ##SOURCE=$(whereis source)
