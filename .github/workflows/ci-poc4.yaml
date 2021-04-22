@@ -19,10 +19,10 @@ jobs:
     steps:
       - name: Checkout the Ruby Storage Cache 
         uses: actions/checkout@v2
-          with:
-            repository: kentonshade/ruby-storage-cache
-            path: storage-cache
-            ref: master
+        with:
+          repository: kentonshade/ruby-storage-cache
+          path: storage-cache
+          ref: master
 
       - name: Checkout default
         uses: actions/checkout@v2
