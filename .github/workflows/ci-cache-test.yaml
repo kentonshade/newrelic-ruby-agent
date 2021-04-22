@@ -24,4 +24,5 @@ jobs:
           ls -la
           du -sh storage-cache/
           cd storage-cache
+          cd gha
           ls -la
