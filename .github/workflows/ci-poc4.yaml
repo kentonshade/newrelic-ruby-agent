@@ -18,7 +18,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: testing commands (apt)
+      - name: testing commands (apt) ##
         run: |
           su - gha
           whoami
