@@ -23,10 +23,12 @@ jobs:
         run: |
           ## su - gha
           cd /home/gha
-          ls -la 
+          ls -la
+          whereis source
           cat .bashrc
           SOURCE=$(whereis source)
-          $SOURCE .bashrc
+          echo $SOURCE
+          ##$SOURCE .bashrc
           whoami
           printenv
           ## sudo apt-get update
