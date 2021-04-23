@@ -27,11 +27,17 @@ jobs:
           cd gha
           ls -la
 
-      - name: Commands 1
+      - name: Commands 1 ## The above repos could be added to this step with additional "uses" - testing
+        uses: actions/checkout@v2
+        uses: actions/checkout@v2
+        with:
+          repository: kentonshade/ruby-storage-cache
+          path: storage-cache
+          ref: master
         uses: docker://kentonshade/newrelic-ruby:bionic-runner-2.2.0
         with:
           command: |
-            ## su - gha
+            ## su - gha  ## Interestingly, cannot change the user during the build - run sudo as a user and test
             cd ${GITHUB_WORKSPACE}
             ls -la 
             cd /home/gha
